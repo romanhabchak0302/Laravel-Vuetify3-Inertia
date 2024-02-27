@@ -1,10 +1,14 @@
 <template>
   <profile-layout>
     <template #title>General Info</template>
-    <div class="text-subtitle-1">Name:</div>
-    <div class="text-caption ml-2">{{ user.name }}</div>
-    <div class="text-subtitle-1">Email:</div>
-    <div class="text-caption ml-2">{{ user.email }}</div>
+      <div class="text-subtitle-1">
+        Name:
+        <span class="text-caption ml-2">{{ user.name }}</span>
+      </div>
+    <div class="text-subtitle-1">
+      Email:
+      <span class="text-caption ml-2">{{ user.email }}</span>
+    </div>
   </profile-layout>
 </template>
 
