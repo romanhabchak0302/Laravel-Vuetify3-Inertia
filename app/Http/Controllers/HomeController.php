@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $tasks = Task::with('user')->get();
+        $tasks = Task::with('user')->paginate(10);
 
         return Inertia::render('Home', compact('tasks'));
     }

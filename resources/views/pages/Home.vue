@@ -3,8 +3,7 @@
     <div class="">
       <v-card>
         <v-table
-          :items="tasks"
-          :headers="headers"
+          :items="tasks.data"
           hide-default-footer
           density="compact"
         >
@@ -20,7 +19,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="item in tasks"
+              v-for="item in tasks.data"
               :key="item.id"
             >
               <td>{{ item.title }}</td>
@@ -29,8 +28,11 @@
           </tbody>
         </v-table>
         <v-pagination
-          :total="100"
+          v-model="tasks.current_page"
+          :total="tasks.total"
+          :length="tasks.total / tasks.per_page"
           density="compact"
+          @update:model-value="handlePageChange"
         ></v-pagination>
       </v-card>
     </div>
@@ -38,12 +40,18 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, computed } from 'vue'
+import { router } from '@inertiajs/vue3'
 
-defineProps({
+const props = defineProps({
   tasks: {
-    type: Array,
-    default: () => []
+    type: Object
   }
 })
+
+const handlePageChange = (v) => {
+  router.get(props.tasks.path, {
+    page: v
+  })
+}
 </script>
