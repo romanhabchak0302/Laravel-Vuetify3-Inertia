@@ -28,4 +28,9 @@ export default defineConfig({
       "@": "/resources"
     },
   },
+  server: {
+    hmr: {
+      host: 'localhost',
+    },
+  }
 });

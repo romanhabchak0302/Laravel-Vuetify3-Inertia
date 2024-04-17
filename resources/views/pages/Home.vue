@@ -1,6 +1,9 @@
 <template>
   <default-layout>
     <div class="">
+      <div class="text-right mb-2">
+        <v-btn color="primary" class="">Create</v-btn>
+      </div>
       <v-card>
         <v-table
           :items="tasks.data"
