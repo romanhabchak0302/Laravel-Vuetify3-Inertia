@@ -12,7 +12,8 @@
         "sass": "^1.69.5",
         "vite": "^4.0.0",
         "vite-plugin-vuetify": "^1.0.2",
-        "vuetify": "^3.4.4"
+        "vuetify": "^3.4.4",
+        "unplugin-auto-import": "^0.17.5"
     },
     "dependencies": {
         "@inertiajs/inertia-vue3": "^0.6.0",

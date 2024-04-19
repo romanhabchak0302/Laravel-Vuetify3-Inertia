@@ -2,7 +2,10 @@
   <default-layout>
     <div class="">
       <div class="text-right mb-2">
-        <v-btn color="primary" class="">Create</v-btn>
+        <v-btn color="primary" class="" @click="dialog = true">
+          <v-icon>mdi-plus</v-icon>
+          Create
+        </v-btn>
       </div>
       <v-card>
         <v-table
@@ -39,11 +42,38 @@
         ></v-pagination>
       </v-card>
     </div>
+
+    <v-dialog
+      v-model="dialog"
+      width="auto"
+    >
+      <v-card
+        width="400"
+        title="Create a new task."
+      >
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              variant="outlined"
+              density="compact"
+              label="Title"
+            ></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            class="ms-auto"
+            variant="elevated"
+            color="primary"
+            @click="dialog = false"
+          >Ok</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </default-layout>
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue'
 import { router } from '@inertiajs/vue3'
 
 const props = defineProps({
@@ -51,6 +81,8 @@ const props = defineProps({
     type: Object
   }
 })
+
+const dialog = ref(false)
 
 const handlePageChange = (v) => {
   router.get(props.tasks.path, {
