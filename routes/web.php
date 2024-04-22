@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function() {
     Route::post("/me/password-reset", [ProfileController::class, 'resetPassword']);
     Route::get("/me/general", [ProfileController::class, 'showGeneralInfo']);
     Route::get("/", [HomeController::class, 'index']);
+
+    Route::post("/tasks", [TaskController::class, 'store']);
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function() {

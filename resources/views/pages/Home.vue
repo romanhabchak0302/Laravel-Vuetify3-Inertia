@@ -52,8 +52,9 @@
         title="Create a new task."
       >
         <v-card-text>
-          <v-form>
+          <v-form v-model="valid">
             <v-text-field
+              v-model="form.title"
               variant="outlined"
               density="compact"
               label="Title"
@@ -65,7 +66,8 @@
             class="ms-auto"
             variant="elevated"
             color="primary"
-            @click="dialog = false"
+            :loading="loading"
+            @click="handleSubmit"
           >Ok</v-btn>
         </v-card-actions>
       </v-card>
@@ -74,7 +76,7 @@
 </template>
 
 <script setup>
-import { router } from '@inertiajs/vue3'
+import { router, useForm } from '@inertiajs/vue3'
 
 const props = defineProps({
   tasks: {
@@ -82,11 +84,27 @@ const props = defineProps({
   }
 })
 
+const form = useForm({
+  title: '',
+});
 const dialog = ref(false)
+const valid = ref(false)
+const loading = ref(false)
 
 const handlePageChange = (v) => {
   router.get(props.tasks.path, {
     page: v
   })
+}
+const handleSubmit = async () => {
+  loading.value = true
+
+  form.post('/tasks', {
+    preserveScroll: true,
+    onFinish() {
+      loading.value = false
+      dialog.value = false
+    }
+  });
 }
 </script>
